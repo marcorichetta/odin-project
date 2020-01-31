@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+  <head>
+    <title>Rock, Paper, Scissors CLI Mode</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <h1>Play the game on console typing <i>game()</i>.</h1>
+    <script>
+      // Choose random computer decision
+      function computerPlay() {
+        let choice = ['Rock', 'Paper', 'Scissors'];
+        let indice = Math.floor(Math.random() * Math.floor(3)); // Saves a random number between 0, 1, 2
+        return choice[indice];
+      }
+
+      /* Play a round and return 1 if you win, -1 if you lose and 0 if tied.
+         In the future I might find a really better implementation for this problem
+         but at this level of Javascripting, it's the only one I'm aware of.
+      */
+      function playRound(playerSelection, computerSelection) {
+        switch (playerSelection) {
+          case 'rock':
+            if (computerSelection == "Paper") {
+              console.log("You lose! Paper beats Rock")
+              return -1
+            } else if (computerSelection == "Scissors") {
+              console.log("You win!")
+              return 1
+            } else {
+              return 0
+            }
+            break;
+          
+          case 'paper':
+            if (computerSelection == "Scissors") {
+              console.log("You lose! Scissors beats Paper")
+              return -1
+            } else if (computerSelection == "Rock") {
+              console.log("You win")
+              return 1
+            } else {
+              return 0
+            }
+            break;
+
+          case 'scissors':
+            if (computerSelection == 'Rock') {
+              console.log("You lose! Rock beats Scissors")
+              return -1
+            } else if (computerSelection == "Paper") {
+              console.log("You win")
+              return 1
+            } else {
+              return 0
+            }
+            break;
+        }
+      }
+
+      // Plays 5 rounds and prints the results of the match.
+      function game() {
+        let playerScore = 0;
+        let computerScore = 0;
+
+        for (let i = 0; i < 5; i++) {
+          
+          // Saves the score based on the return of playRound().
+          let score = playRound(prompt("Rock, Paper or Scissors?"), computerPlay());
+
+          switch (score) {
+            case -1:
+              console.log("Computer earned a point")
+              computerScore += 1;
+              break;
+            case 1:
+              console.log("You earned a point")
+              playerScore += 1;
+              break;
+            case 0:
+              console.log("Tied")
+              break;
+          }
+        }
+      
+      console.log("Game finished!")
+      console.log(`Scores: Computer: ${computerScore}, Player: ${playerScore}`);
+      }
+    </script>
+  </body>
+</html>
